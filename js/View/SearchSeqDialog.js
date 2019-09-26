@@ -639,7 +639,7 @@ return declare( ActionBarDialog, {
         var customMatrixCDiv = dom.create('div', {className: 'section',style:{position: 'left'}}, customMatrixDiv);
         var customMatrixGDiv = dom.create('div', {className: 'section',style:{position: 'left'}}, customMatrixDiv);
         var customMatrixTDiv = dom.create('div', {className: 'section',style:{position: 'left'}}, customMatrixDiv);
-        content.custommatrixnamefield = new dTextBox( {name: 'custommatrixname',style: 'width: 14em;',placeholder:'custom name'}, customMatrixNameDiv );
+        content.custommatrixnamefield = new dTextBox( {name: 'custommatrixname',style: 'width: 14em;',placeholder:'custom name (required)'}, customMatrixNameDiv );
         content.custommatrixafield    = new dTextBox( {name: 'custommatrixa',style: 'width: 15em;',placeholder:'A:0 12 0 4...'}, customMatrixADiv );
         content.custummatrixcfield    = new dTextBox( {name: 'custummatrixc',style: 'width: 15em;',placeholder:'C:12 0 0 6...'}, customMatrixCDiv);
         content.custommatrixgfield    = new dTextBox( {name: 'custommatrixg',style: 'width: 15em;',placeholder:'G:0 0 12 0...'}, customMatrixGDiv);
@@ -674,12 +674,13 @@ return declare( ActionBarDialog, {
                                 content.custommatrixgfield.get('value'),
                                 content.custommatrixtfield.get('value')];
             var newarray = {};
+
             for (var i=0;i<custommatrix.length; i++) {
                 if (custommatrix[i].indexOf(':') >=0 ) { //eliminate leading label if present
-                    custommatrix[i] = customermatrix[i].substring(custommatrix[i].indexOf(':')+1);
+                    custommatrix[i] = custommatrix[i].substring(custommatrix[i].indexOf(':')+1);
                 }
 
-                newarray[i]=custommatrix[i].split(' ');
+                newarray[i]=custommatrix[i].split(/\s+/);
                 for (var j=0; j<newarray[i].length; j++) {
                     newarray[i][j]= parseFloat(newarray[i][j]);
                 }
