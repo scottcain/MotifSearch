@@ -629,6 +629,13 @@ return declare( ActionBarDialog, {
         var minscoreDiv = dom.create('div', {className: 'section',style:{position: 'relative'}}, radiocolone);
 
         content.minscorefield = new dTextBox( {name: 'minscore',style: 'width: 7em;',placeholder:'min score %'}, minscoreDiv  );
+
+        var helpText1 = '<ul><li>Min score is the minimum percent match to the matrix.<li>Custom matrices require a name. Each row of the matrix in order A, C, G, T with one or more spaces between elements.</ul>';
+        var helpText2 = '<ul><li>To see a track\'s matrix, check the track label\'s drop down menu.<li>Matrix search tracks do not survive page reloads.</ul>';
+
+        var helpTextContainer1 = dom.create('div', {name:'helptext1', innerHTML: helpText1, style:{position: 'relative'}}, radiocolone); 
+        var helpTextContainer2 = dom.create('div', {name:'helptext2', innerHTML: helpText2, style:{position: 'relative'}}, radiocoltwo);
+
         //minscoreDiv.appendChild(content.minscorefield.domNode);
         //dom.create( "label", {"for" : "minscore", innerHTML: "Minimum score"}, minscoreDiv);
 
