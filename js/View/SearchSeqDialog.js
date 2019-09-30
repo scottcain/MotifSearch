@@ -696,6 +696,12 @@ return declare( ActionBarDialog, {
             matrixC = newarray[1];
             matrixG = newarray[2];
             matrixT = newarray[3];
+
+            var alen = matrixA.length;
+            if (alen != matrixC.length || alen!=matrixG.length || alen!=matrixT.length) {
+                alert('The length of the rows of the matrix are not equal length.');
+            }
+
         }
 
         //console.log(matrixA);
