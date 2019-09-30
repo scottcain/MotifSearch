@@ -49,14 +49,19 @@ return declare( JBrowsePlugin,
                 };
                 var storeName = thisB.browser.addStoreConfig( undefined, storeConf );
                 storeConf.name = storeName;
+                var br = '<br>';
+                var a_str = "A:["+searchParams.matrix_A.join(" ") +"]"; 
+                var c_str = "C:["+searchParams.matrix_C.join(" ") +"]";
+                var g_str = "G:["+searchParams.matrix_G.join(" ") +"]";
+                var t_str = "T:["+searchParams.matrix_T.join(" ") +"]";
                 var searchTrackConfig = {
                     type: 'JBrowse/View/Track/CanvasFeatures',
                     label: 'motif_search_track_' + (thisB._searchTrackCount++),
-                    key: "Search PWM  for "+ searchParams.matrix + " (min score:" + searchParams.minscore + ")",
+                    key: "PWM search for "+ searchParams.matrix + " (min score:" + searchParams.minscore + ")",
                     unsafePopup: true,
                     metadata: {
                         category: 'Local tracks',
-                        Description: "Contains all matches of the motif " + searchParams.matrix
+                        Description: "Contains all matches of the motif " + searchParams.matrix +br+a_str+br+c_str+br+g_str+br+t_str
                     },
                     store: storeName
                 };
