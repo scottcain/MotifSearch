@@ -690,6 +690,9 @@ return declare( ActionBarDialog, {
                 newarray[i]=custommatrix[i].split(/\s+/);
                 for (var j=0; j<newarray[i].length; j++) {
                     newarray[i][j]= parseFloat(newarray[i][j]);
+                    if (isNaN(newarray[i][j])) {
+                        alert('Something that is not a number was put in the matrix.');
+                    }
                 }
             }
             matrixA = newarray[0];
