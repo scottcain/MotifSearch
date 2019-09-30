@@ -52,7 +52,8 @@ return declare( JBrowsePlugin,
                 var searchTrackConfig = {
                     type: 'JBrowse/View/Track/CanvasFeatures',
                     label: 'motif_search_track_' + (thisB._searchTrackCount++),
-                    key: "Search  for "+ searchParams.matrix + " (min score:" + searchParams.minscore + ")",
+                    key: "Search PWM  for "+ searchParams.matrix + " (min score:" + searchParams.minscore + ")",
+                    unsafePopup: true,
                     metadata: {
                         category: 'Local tracks',
                         Description: "Contains all matches of the motif " + searchParams.matrix
