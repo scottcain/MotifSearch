@@ -51,7 +51,7 @@ return declare( JBrowsePlugin,
                 storeConf.name = storeName;
                 var searchTrackConfig = {
                     type: 'JBrowse/View/Track/CanvasFeatures',
-                    label: 'search_track_' + (thisB._searchTrackCount++),
+                    label: 'motif_search_track_' + (thisB._searchTrackCount++),
                     key: "Search  for "+ searchParams.matrix + " (min score:" + searchParams.minscore + ")",
                     metadata: {
                         category: 'Local tracks',
