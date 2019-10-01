@@ -692,6 +692,7 @@ return declare( ActionBarDialog, {
                     newarray[i][j]= parseFloat(newarray[i][j]);
                     if (isNaN(newarray[i][j])) {
                         alert('Something that is not a number was put in the matrix.');
+                        return false;
                     }
                 }
             }
@@ -703,6 +704,7 @@ return declare( ActionBarDialog, {
             var alen = matrixA.length;
             if (alen != matrixC.length || alen!=matrixG.length || alen!=matrixT.length) {
                 alert('The length of the rows of the matrix are not equal length.');
+                return false;
             }
 
         }
