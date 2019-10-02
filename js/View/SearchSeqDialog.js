@@ -674,6 +674,9 @@ return declare( ActionBarDialog, {
             }
         }
 
+        var nota = false;
+        var noteq= false;
+
         if (content.custommatrixnamefield.get('value')) {
             selected = content.custommatrixnamefield.get('value');
             var custommatrix = [content.custommatrixafield.get('value'),
@@ -684,15 +687,14 @@ return declare( ActionBarDialog, {
 
             for (var i=0;i<custommatrix.length; i++) {
                 if (custommatrix[i].indexOf(':') >=0 ) { //eliminate leading label if present
-                    custommatrix[i] = custommatrix[i].substring(custommatrix[i].indexOf(':')+1);
+                    custommatrix[i] = custommatrix[i].substring(custommatrix[i].indexOf(':')+1).trim();
                 }
 
                 newarray[i]=custommatrix[i].split(/\s+/);
                 for (var j=0; j<newarray[i].length; j++) {
                     newarray[i][j]= parseFloat(newarray[i][j]);
                     if (isNaN(newarray[i][j])) {
-                        alert('Something that is not a number was put in the matrix.');
-                        return false;
+                        nota = true;;
                     }
                 }
             }
@@ -703,8 +705,7 @@ return declare( ActionBarDialog, {
 
             var alen = matrixA.length;
             if (alen != matrixC.length || alen!=matrixG.length || alen!=matrixT.length) {
-                alert('The length of the rows of the matrix are not equal length.');
-                return false;
+                noteq = true;
             }
 
         }
@@ -722,7 +723,9 @@ return declare( ActionBarDialog, {
             matrix_C: matrixC,
             matrix_G: matrixG,
             matrix_T: matrixT,
-            minscore: min_score
+            minscore: min_score,
+            noteq : noteq,
+            nota : nota
         };
     },
 
@@ -734,8 +737,16 @@ return declare( ActionBarDialog, {
                             iconClass: 'dijitIconBookmark',
                             onClick: function() {
                                 var searchParams = thisB._getSearchParams();
-                                thisB.callback( searchParams );
-                                thisB.hide();
+                                if (searchParams.nota) {
+                                    alert('Something that is not a number was put in the matrix.');
+                                }
+                                else if (searchParams.noteq) {
+                                    alert('The length of the rows of the matrix are not equal length.');
+                                }
+                                else {
+                                    thisB.callback( searchParams );
+                                    thisB.hide();
+                                }
                             }
                         })
             .placeAt( actionBar );
