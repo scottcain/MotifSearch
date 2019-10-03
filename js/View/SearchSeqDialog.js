@@ -34,7 +34,7 @@ return declare( ActionBarDialog, {
         });
     },
 
-    _dialogContent: function () {
+    async _dialogContent () {
         var content = this.content = {};
 
         var container = dom.create('div', { className: 'search-dialog' } );
@@ -52,20 +52,30 @@ return declare( ActionBarDialog, {
 
         //pull in matrices from an external json file
         //content.matrices =  JSON.parse( motifData );
-        dojo.xhrGet({
+        this.set( 'content', 'Loading...' );
+        try {
+            const res = await fetch("/tools/genome/jbrowse/plugins/MotifSearch/js/View/sample_motifs.json")
+            const obj = await res.json()
+            content.matrices = obj.matrices;
+        } catch(e) {
+            console.error('Error',e);
+            this.set( 'content', 'Error: '+e );
+            return
+        }
+
+
+       /* dojo.xhrGet({
             url: "/tools/genome/jbrowse/plugins/MotifSearch/js/View/sample_motifs.json",
             handleAs: "json",
             load: function(obj) {
-                  /* here, obj will already be a JS object deserialized from the JSON response */
+                  // here, obj will already be a JS object deserialized from the JSON response 
                   console.log(obj.matrices);
                   content.matrices = obj.matrices;
             },
             error: function(err) {
                 console.log('the motif file couldnt be loaded'); 
             }
-        });
-
-        console.log(content.matrices);
+        });*/
 
         content.matrixbutton = [];
 
@@ -123,7 +133,7 @@ return declare( ActionBarDialog, {
         content.custommatrixtfield    = new dTextBox( {name: 'custommatrixt',style: 'width: 15em;',placeholder:'T:0 0 0 2...'}, customMatrixTDiv);
 
 
-        return container;
+        this.set( 'content', container ); 
     },
 
     _getSearchParams: function() {
@@ -235,7 +245,8 @@ return declare( ActionBarDialog, {
     show: function ( callback ) {
         this.callback = callback || function() {};
         this.set( 'title', "Add motif search track");
-        this.set( 'content', this._dialogContent() );
+        this._dialogContent();
+        this.set( 'style', 'width : 800px');
         this.inherited( arguments );
         focus.focus( this.closeButtonNode );
     }
