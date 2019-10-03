@@ -9,9 +9,7 @@ define([
         'dijit/form/RadioButton',
         'dijit/form/TextBox',
         'dijit/form/Select',
-        'JBrowse/View/Dialog/WithActionBar',
-        'dojo/json', 
-        'dojo/text!./sample_motifs.json'
+        'JBrowse/View/Dialog/WithActionBar'
     ],
     function(
         declare,
@@ -23,9 +21,7 @@ define([
         dRadioButton,
         dTextBox,
         dSelect,
-        ActionBarDialog,
-        JSON,
-        motifData
+        ActionBarDialog
     ) {
 
 return declare( ActionBarDialog, {
@@ -55,7 +51,21 @@ return declare( ActionBarDialog, {
 
 
         //pull in matrices from an external json file
-        content.matrices =  JSON.parse( motifData );
+        //content.matrices =  JSON.parse( motifData );
+        dojo.xhrGet({
+            url: "/tools/genome/jbrowse/plugins/MotifSearch/js/View/sample_motifs.json",
+            handleAs: "json",
+            load: function(obj) {
+                  /* here, obj will already be a JS object deserialized from the JSON response */
+                  console.log(obj.matrices);
+                  content.matrices = obj.matrices;
+            },
+            error: function(err) {
+                console.log('the motif file couldnt be loaded'); 
+            }
+        });
+
+        console.log(content.matrices);
 
         content.matrixbutton = [];
 
