@@ -687,8 +687,9 @@ return declare( ActionBarDialog, {
 
             for (var i=0;i<custommatrix.length; i++) {
                 if (custommatrix[i].indexOf(':') >=0 ) { //eliminate leading label if present
-                    custommatrix[i] = custommatrix[i].substring(custommatrix[i].indexOf(':')+1).trim();
+                    custommatrix[i] = custommatrix[i].substring(custommatrix[i].indexOf(':')+1);
                 }
+                custommatrix[i] = custommatrix[i].trim();
 
                 newarray[i]=custommatrix[i].split(/\s+/);
                 for (var j=0; j<newarray[i].length; j++) {
