@@ -22,7 +22,7 @@ the same data structure, add the matrices you do want and save.
 * Run ./setup.sh again to have the changes incorporated into the JBrowse
 webpack.
 
-##Working example
+## Working example
 
 Generally, there should always be a working example of this plugin running
 at 
